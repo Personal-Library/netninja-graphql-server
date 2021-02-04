@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 // Allows express to understand the GraphQL. Use as middleware
 const { graphqlHTTP } = require('express-graphql');
@@ -22,6 +23,9 @@ mongoose.connect(config.CONNECTION_URL, {
 mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB!')
 });
+
+// Allow cross-origin requests
+app.use(cors());
 
 // Use GraphQLHTTP as middleman
 app.use('/graphql', graphqlHTTP({ 
