@@ -24,7 +24,8 @@ mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB!')
 });
 
-// Allow cross-origin requests
+// Allow cross-origin requests since the front-end server is requesting
+// from the back-end server
 app.use(cors());
 
 // Use GraphQLHTTP as middleman

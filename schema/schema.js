@@ -1,5 +1,5 @@
 const graphql = require('graphql');
-// using lodash for processing dummy data
+// using lodash only for processing dummy data
 const _ = require('lodash');
 
 // Import types from graphql
@@ -13,7 +13,7 @@ const {
 	GraphQLNonNull,
 } = graphql;
 
-// Import models from mongoose
+// Import models we made from mongoose
 const Book = require('../models/book.js');
 const Author = require('../models/author.js');
 
@@ -50,6 +50,9 @@ const BookType = new GraphQLObjectType({
 	}),
 });
 
+// An object is passed, with the name and fields keys, if the data is to be 
+// extended then a resolve(parents, args) {} method must be passed
+// In the resolve method you can use mongoose to map the objects you need
 const AuthorType = new GraphQLObjectType({
 	name: 'Author',
 	fields: () => ({
@@ -66,7 +69,9 @@ const AuthorType = new GraphQLObjectType({
 	}),
 });
 
-// In the RootQuery you handle the query 'routing'
+// After declaring the complex types that will be used you define the queries
+// Thus in the RootQuery you handle the query 'routing'
+// These are all queries that can be passed to Apollo
 const RootQuery = new GraphQLObjectType({
 	name: 'RootQueryType',
 	fields: {
